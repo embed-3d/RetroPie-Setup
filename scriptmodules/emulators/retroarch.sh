@@ -28,7 +28,7 @@ function depends_retroarch() {
 
 function sources_retroarch() {
     gitPullOrClone "$md_build" https://github.com/libretro/RetroArch.git v1.5.0
-    if isPlatform "mali" && !isPlatform "H3"; then
+    if [ isPlatform "mali" && ! isPlatform "H3" ]; then
         sed -i 's|struct mali_native_window native_window|fbdev_window native_window|' gfx/drivers_context/mali_fbdev_ctx.c
     fi
     applyPatch "$md_data/01_hotkey_hack.diff"
@@ -39,7 +39,7 @@ function build_retroarch() {
     local params=(--enable-sdl2)
     ! isPlatform "x11" && params+=(--disable-x11 --enable-opengles --disable-ffmpeg --disable-sdl --enable-sdl2 --disable-oss --disable-pulse --disable-al --disable-jack)
     isPlatform "rpi" && params+=(--enable-dispmanx)
-    isPlatform "mali" && params+=(--enable-mali_fbdev)
+    isPlatform "mali" && ! isPlatform "H3" && params+=(--enable-mali_fbdev)
     if isPlatform "arm"; then
         params+=(--enable-floathard)
         isPlatform "neon" && params+=(--enable-neon)
