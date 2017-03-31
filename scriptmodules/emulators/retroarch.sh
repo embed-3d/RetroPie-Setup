@@ -20,6 +20,7 @@ function depends_retroarch() {
     isPlatform "mali" && ! isPlatform "H3" && depends+=(mali-fbdev)
     isPlatform "x86" && depends+=(nvidia-cg-toolkit)
     isPlatform "x11" && depends+=(libpulse-dev libavcodec-dev libavformat-dev libavdevice-dev)
+    isPlatform "H3" && depends+=(icu-devtools libavcodec-dev libavutil-dev libgbm-dev libicu-dev libswresample-dev libxml2-dev)
 
     getDepends "${depends[@]}"
 
@@ -28,7 +29,7 @@ function depends_retroarch() {
 
 function sources_retroarch() {
     gitPullOrClone "$md_build" https://github.com/libretro/RetroArch.git v1.5.0
-    if [ isPlatform "mali" && ! isPlatform "H3" ]; then
+    if isPlatform "mali" && ! isPlatform "H3"; then
         sed -i 's|struct mali_native_window native_window|fbdev_window native_window|' gfx/drivers_context/mali_fbdev_ctx.c
     fi
     applyPatch "$md_data/01_hotkey_hack.diff"
