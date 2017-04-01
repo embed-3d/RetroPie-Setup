@@ -37,6 +37,7 @@ function depends_sdl2() {
     isPlatform "rpi" && depends+=(libraspberrypi-dev)
     isPlatform "mali" && ! isPlatform "H3" && depends+=(mali-fbdev)
     isPlatform "x11" && depends+=(libpulse-dev)
+    isPlatform "H3" && depends+=(libsdl2-dev)
     getDepends "${depends[@]}"
 }
 
