@@ -77,7 +77,7 @@ function install_sdl2() {
 }
 
 function install_bin_sdl2() {
-    if ! isPlatform "rpi" ; then
+    if ! isPlatform "rpi"; then
         md_ret_errors+=("$md_id is only available as a binary package for platform rpi")
         return 1
     fi
