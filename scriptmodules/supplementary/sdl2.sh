@@ -77,14 +77,19 @@ function install_sdl2() {
 }
 
 function install_bin_sdl2() {
-    if ! isPlatform "rpi"; then
-        md_ret_errors+=("$md_id is only available as a binary package for platform rpi")
+    if ! isPlatform "rpi" && ! isPlatform "H3"; then
+        md_ret_errors+=("$md_id is only available as a binary package for platform rpi and H3")
         return 1
     fi
+    if isPlatform "rpi"; then
     wget -c "$__binary_url/libsdl2-dev_$(get_pkg_ver_sdl2)_armhf.deb"
     wget -c "$__binary_url/libsdl2-2.0-0_$(get_pkg_ver_sdl2)_armhf.deb"
     install_sdl2
     rm ./*.deb
+    fi
+    if isPlatform "H3"; then
+    apt-get install -y libsdl2-dev
+    fi
 }
 
 function remove_sdl2() {
