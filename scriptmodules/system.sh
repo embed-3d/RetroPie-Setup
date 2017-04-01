@@ -237,7 +237,11 @@ function get_platform() {
                 __platform="odroid-c2"
                 ;;
             sun8i)
-                __platform="H3-mali"
+                if [[ -f /etc/armbian-release ]]; then
+                   __platform="H3-mali"
+                else
+                   fatalError "Please use an armbian image or update your system"
+                fi
                 ;;
             "Freescale i.MX6 Quad/DualLite (Device Tree)")
                 __platform="imx6"
