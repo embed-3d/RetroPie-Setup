@@ -240,7 +240,7 @@ function getDepends() {
                 else
                     rp_callModule sdl1
                 fi
-            elif [[ "$required" == "libsdl2-dev" ]]; then
+            elif ! isPlatform "H3" && [[ "$required" == "libsdl2-dev" ]]; then
                 if [[ "$__has_binaries" -eq 1 ]]; then
                     rp_callModule sdl2 install_bin
                 else
