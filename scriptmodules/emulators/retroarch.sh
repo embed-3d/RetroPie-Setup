@@ -20,7 +20,7 @@ function depends_retroarch() {
     isPlatform "mali" && ! isPlatform "H3" && depends+=(mali-fbdev)
     isPlatform "x86" && depends+=(nvidia-cg-toolkit)
     isPlatform "x11" && depends+=(libpulse-dev libavcodec-dev libavformat-dev libavdevice-dev)
-    isPlatform "H3" && depends+=(icu-devtools libavcodec-dev libavutil-dev libgbm-dev libicu-dev libswresample-dev libxml2-dev libsdl2-dev)
+    isPlatform "H3" && depends+=(icu-devtools libavcodec-dev libavutil-dev libgbm-dev libicu-dev libswresample-dev libxml2-dev)
 
     getDepends "${depends[@]}"
 
